@@ -1,2 +1,2 @@
-# pokesweeper
+# Pokesweeper
 Minesweeper with Pokemon sprites
