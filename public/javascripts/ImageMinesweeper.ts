@@ -1,6 +1,6 @@
-import ColorCell = require('./ColorCell');
-import Minefield = require('./Minefield');
-import Minesweeper = require('./Minesweeper');
+/// <reference path="ColorCell.ts" />
+/// <reference path="Minefield.ts" />
+/// <reference path="Minesweeper.ts" />
 
 class ImageMinesweeper extends Minesweeper {
     
@@ -35,5 +35,3 @@ class ImageMinesweeper extends Minesweeper {
         return new Minefield(cells);
     }
 }
-
-export = ImageMinesweeper;

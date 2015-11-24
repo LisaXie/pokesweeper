@@ -1,5 +1,5 @@
-import Cell = require('./Cell');
-import Minefield = require('./Minefield');
+/// <reference path="Cell.ts" />
+/// <reference path="Minefield.ts" />
 
 /**
  * An "abstract" class for one game instance of minesweeper
@@ -83,5 +83,3 @@ class Minesweeper {
         this.field.updateCellAdjacency();
     }
 }
-
-export = Minesweeper;

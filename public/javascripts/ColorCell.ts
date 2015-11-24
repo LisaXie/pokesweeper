@@ -1,4 +1,4 @@
-import Cell = require('./Cell');
+/// <reference path="Cell.ts" />
 
 class ColorCell extends Cell {
     
@@ -9,5 +9,3 @@ class ColorCell extends Cell {
         super(bomb);
     }
 }
-
-export = ColorCell;
