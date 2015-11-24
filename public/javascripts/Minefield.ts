@@ -71,6 +71,8 @@ class Minefield {
         for (var row = 0; row < this.rows; row++) {
             for (var col = 0; col < this.cols; col++) {
                 var cell = this.cells[row][col];
+                if (!cell) { continue; }
+                
                 cell.adjCells = [];
                 cell.adjBombCount = 0;
 
