@@ -1,5 +1,6 @@
 /// <reference path="Cell.ts" />
 /// <reference path="Minefield.ts" />
+/// <reference path="MSObserver.ts" />
 
 /**
  * An "abstract" class for one game instance of minesweeper
