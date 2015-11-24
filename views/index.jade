@@ -1,11 +1,14 @@
 extends layout
 
 block head
+  script.
+    cells = !{JSON.stringify(cells)};
   script(src='javascripts/Cell.js')
   script(src='javascripts/ColorCell.js')
   script(src='javascripts/Minefield.js')
   script(src='javascripts/Minesweeper.js')
   script(src='javascripts/ImageMinesweeper.js')
+  script(src='javascripts/index.js')
 
 block content
   p #{cells}
