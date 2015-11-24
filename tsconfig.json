@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "ES5"
+	},
+	"files": [
+		"typings/tsd.d.ts",
+        
+		"minesweeper/Cell.ts",
+        "minesweeper/ColorCell.ts",
+		"minesweeper/Input.ts",
+		"minesweeper/Minefield.ts",
+		"minesweeper/Minesweeper.ts",
+		"minesweeper/MSObserver.ts",
+		"minesweeper/PngParser.ts",
+		"minesweeper/RectMinesweeper.ts",
+        "minesweeper/ImageMinesweeper.ts",
+		"minesweeper/TextMinesweeper.ts",
+        
+        "app.ts",
+        "routes.ts"
+	]
+}
