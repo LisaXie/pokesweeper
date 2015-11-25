@@ -2,7 +2,7 @@ import fs = require('fs');
 import pngjs = require('pngjs');
 
 /**
- * Takes a PNG file and converts it into a 2D array of ARGB colors as numbers
+ * Takes a PNG file and converts it into a 2D array of RGBA colors as strings
  */
 class PngParser {
     /**
@@ -32,13 +32,24 @@ class PngParser {
         return imageArray;
     }
 
-    private static getNthPixel(data, n): number {
-        var a = data[n * 4];
-        var r = data[n * 4 + 1];
-        var g = data[n * 4 + 2];
-        var b = data[n * 4 + 3];
+    private static getNthPixel(data, n): string {
+        var r = data[n * 4];
+        var g = data[n * 4 + 1];
+        var b = data[n * 4 + 2];
 
-        return (a << 24) + (r << 16) + (g << 8) + b;
+        return this.toTwoDigHex(r) + this.toTwoDigHex(g) + this.toTwoDigHex(b);
+    }
+    
+    private static toTwoDigHex(num: number): string {
+        var hex = num.toString(16);
+        
+        if (hex.length == 1) {
+            return '0' + hex;
+        } else if (hex.length == 2) {
+            return hex;
+        }
+        
+        throw 'Invalid color value';
     }
 }
 

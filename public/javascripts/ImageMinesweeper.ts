@@ -4,12 +4,12 @@
 
 class ImageMinesweeper extends Minesweeper {
     
-    private image: number[][];
+    private image: string[][];
     
     /**
      * Takes an image represented by a 2D ARGB array
      */
-    constructor(image: number[][], bombCount: number) {
+    constructor(image: string[][], bombCount: number) {
         this.image = image;
         this.bombCount = bombCount;
         this.rows = image.length;
@@ -26,7 +26,7 @@ class ImageMinesweeper extends Minesweeper {
             for (var col = 0; col < this.cols; col++) {
                 var color = this.image[row][col];
                 
-                if (color != 0) {
+                if (color) {
                     cells[row][col] = new ColorCell(color, false);
                 }
             }

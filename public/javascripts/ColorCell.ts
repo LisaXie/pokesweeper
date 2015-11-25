@@ -2,9 +2,9 @@
 
 class ColorCell extends Cell {
     
-    private color: number;
+    color: string;
     
-    constructor(color: number, bomb: boolean) {
+    constructor(color: string, bomb: boolean) {
         this.color = color;
         super(bomb);
     }
