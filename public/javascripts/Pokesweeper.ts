@@ -85,15 +85,20 @@ class Pokesweeper implements MSObserver {
     
     private drawCell(row, col) {
         var cell = <ColorCell>this.ms.getCellAt(row, col);
-        var color = cell.open ? cell.color : 'cccccc';
         
         var domCell = $('<div/>', {
             class: 'cell',
             id: this.getCellId(row, col),
-            style: 'background-color: #' + color,
             row: row,
             col: col
         });
+        
+        if (cell.open) {
+            domCell.css('background-color', '#' + cell.color);
+        } else {
+            domCell.addClass('unopenCell');
+        }
+        
         $('#row' + row.toString()).append(domCell);
     }
 }
