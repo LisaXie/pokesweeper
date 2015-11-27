@@ -13,7 +13,8 @@ class Pokesweeper implements MSObserver {
     constructor(cells: string[][]) {
         this.rows = cells.length;
         this.cols = cells[0].length;
-        this.ms = new ImageMinesweeper(cells, 5);
+        this.ms = new ImageMinesweeper(cells, 10);
+        this.ms.addObserver(this);
         this.drawField();
         this.bindCells();
     }
@@ -27,11 +28,12 @@ class Pokesweeper implements MSObserver {
     }
     
     onFieldChanged() {
-        
+        this.drawField();
+        this.bindCells();
     }
     
     onBombStepped(row: number, col: number) {
-        
+        console.log('stepped on a bomb!');
     }
     
     onVictory() {
@@ -39,15 +41,15 @@ class Pokesweeper implements MSObserver {
     }
     
     private drawField(): void {
+        $(this.fieldDomId).empty();
+        
         for (var row = 0; row < this.rows; row++) {
             $(this.fieldDomId).append('<div class="row" id="row' + row.toString() + '"></div>');
             
             for (var col = 0; col < this.cols; col++) {
                 try {
                     var cell = <ColorCell>this.ms.getCellAt(row, col);
-                    if (cell) {
-                        var color = cell.color;
-                    }
+                    var color = cell.open ? cell.color : 'cccccc';
                 } catch (e) {
                     var color = 'white';
                 }
