@@ -15,6 +15,7 @@ class Pokesweeper implements MSObserver {
         this.cols = cells[0].length;
         this.ms = new ImageMinesweeper(cells, 5);
         this.drawField();
+        this.bindCells();
     }
     
     onGameStart() {
@@ -54,11 +55,28 @@ class Pokesweeper implements MSObserver {
                 var domCell = $('<div/>', {
                     class: 'cell',
                     id: this.getCellId(row, col),
-                    style: 'background-color: #' + color
+                    style: 'background-color: #' + color,
+                    row: row,
+                    col: col
                 });
                 $('#row' + row.toString()).append(domCell);
             }
         }
+    }
+    
+    private bindCells(): void {
+        var _this = this;
+        $('.cell').click(function() {
+            var move = _this.getCellMove($(this));
+            _this.ms.makeMove(move.row, move.col);
+        });
+    }
+    
+    private getCellMove(domCell: JQuery) {
+        var row = parseInt(domCell.attr('row'));
+        var col = parseInt(domCell.attr('col'));
+        
+        return { row: row, col: col };
     }
     
     /**
