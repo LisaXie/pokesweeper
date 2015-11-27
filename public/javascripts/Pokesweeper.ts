@@ -47,21 +47,11 @@ class Pokesweeper implements MSObserver {
             $(this.fieldDomId).append('<div class="row" id="row' + row.toString() + '"></div>');
             
             for (var col = 0; col < this.cols; col++) {
-                try {
-                    var cell = <ColorCell>this.ms.getCellAt(row, col);
-                    var color = cell.open ? cell.color : 'cccccc';
-                } catch (e) {
-                    var color = 'white';
+                if (this.ms.isValidCell(row, col)) {
+                    this.drawCell(row, col);
+                } else {
+                    this.drawEmptyCell(row, col);
                 }
-                
-                var domCell = $('<div/>', {
-                    class: 'cell',
-                    id: this.getCellId(row, col),
-                    style: 'background-color: #' + color,
-                    row: row,
-                    col: col
-                });
-                $('#row' + row.toString()).append(domCell);
             }
         }
     }
@@ -86,5 +76,24 @@ class Pokesweeper implements MSObserver {
      */
     private getCellId(row: number, col: number): string {
         return 'cell' + row.toString() + '_' + col.toString();
+    }
+    
+    private drawEmptyCell(row, col) {
+        var domCell = $('<div class="cell emptyCell"></div>');
+        $('#row' + row.toString()).append(domCell);
+    }
+    
+    private drawCell(row, col) {
+        var cell = <ColorCell>this.ms.getCellAt(row, col);
+        var color = cell.open ? cell.color : 'cccccc';
+        
+        var domCell = $('<div/>', {
+            class: 'cell',
+            id: this.getCellId(row, col),
+            style: 'background-color: #' + color,
+            row: row,
+            col: col
+        });
+        $('#row' + row.toString()).append(domCell);
     }
 }

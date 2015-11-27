@@ -26,7 +26,7 @@ class ImageMinesweeper extends Minesweeper {
             for (var col = 0; col < this.cols; col++) {
                 var color = this.image[row][col];
                 
-                if (color) {
+                if (color != 'ffffff') {
                     cells[row][col] = new ColorCell(color, false);
                 }
             }

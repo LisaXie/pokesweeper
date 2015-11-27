@@ -44,8 +44,14 @@ class Minesweeper {
 
         return !this.field.getCellAt(row, col).open;
     }
+    
+    isValidCell(row: number, col: number): boolean {
+        return this.field.isValidCell(row, col);
+    }
 
     makeMove(row: number, col: number): void {
+        console.log([row, col]);
+        
         if (!this.moveMade) {
             // first move, so place bombs
             this.placeBombsExceptFor(row, col);
