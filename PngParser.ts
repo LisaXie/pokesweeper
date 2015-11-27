@@ -58,8 +58,7 @@ class PngParser {
         var rowOffsets = this.getRowOffsets(image);
         var colOffsets = this.getColOffsets(image);
         var offsets = { upper: rowOffsets.upper, lower: rowOffsets.lower, left: colOffsets.left, right: colOffsets.right };
-        console.log(offsets);
-        
+
         var trimmed = [];
         
         for (var row = offsets.upper; row <= offsets.lower; row++) {
