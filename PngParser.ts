@@ -10,13 +10,19 @@ class PngParser {
     /**
      * Parses the image at the specified location, and passes the generated 2D array into the callback
      */
-    static parseImage(file: string, callback: (image: string[][]) => void): void {
+    static parseImage(file: string, callback: (err: Error, image: string[][]) => void): void {
         var _this = this;
 
-        fs.createReadStream(file).pipe(new pngjs.PNG({
-            filterType: 4
-        })).on('parsed', function() {
-            callback(_this.trimImage(_this.generateImageArray(this)));
+        fs.access(file, (err) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                fs.createReadStream(file).pipe(new pngjs.PNG({
+                    filterType: 4
+                })).on('parsed', function(err) {
+                    callback(null, _this.trimImage(_this.generateImageArray(this)));
+                });
+            }
         });
     }
 
