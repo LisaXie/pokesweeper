@@ -37,7 +37,7 @@ class Pokesweeper implements MSObserver {
     }
     
     onVictory() {
-        
+        console.log('WIN');
     }
     
     private drawField(): void {
@@ -95,6 +95,10 @@ class Pokesweeper implements MSObserver {
         
         if (cell.open) {
             domCell.css('background-color', '#' + cell.color);
+            
+            if (cell.adjBombCount != 0) {
+                domCell.text(cell.adjBombCount);
+            }
         } else {
             domCell.addClass('unopenCell');
         }
