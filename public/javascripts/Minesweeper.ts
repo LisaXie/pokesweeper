@@ -38,7 +38,7 @@ class Minesweeper {
     }
 
     isValidMove(row: number, col: number): boolean {
-        if (!this.field.isValidCell) {
+        if (!this.field.isValidCell(row, col)) {
             return false;
         }
 
