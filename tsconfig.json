@@ -7,6 +7,7 @@
 		"typings/tsd.d.ts",
         
 		"public/javascripts/index.ts",
+		"public/javascripts/names.ts",
 		"public/javascripts/Cell.ts",
         "public/javascripts/ColorCell.ts",
 		"public/javascripts/Input.ts",
