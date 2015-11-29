@@ -3,14 +3,17 @@ extends layout
 block head
   script.
     cells = !{JSON.stringify(cells)};
+    currentId = '#{id}';
   script(src='javascripts/Cell.js')
   script(src='javascripts/ColorCell.js')
   script(src='javascripts/Minefield.js')
   script(src='javascripts/Minesweeper.js')
   script(src='javascripts/ImageMinesweeper.js')
   script(src='javascripts/Pokesweeper.js')
+  script(src='javascripts/names.js')
   script(src='javascripts/index.js')
 
 block content
-  p #{cells}
+  h1 Pokesweeper
+  select#dropdown(onchange='selectPokemon()')
   #field

@@ -10,7 +10,7 @@ router.get('/:id', function(req, res, next) {
             console.log('error!');
             res.render('error', { error: err });
         } else {
-            res.render('index', { cells:  cells });
+            res.render('index', { cells:  cells, id: req.params.id });
         }
     });
 });
