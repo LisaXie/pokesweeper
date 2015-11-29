@@ -52,6 +52,9 @@ class Minesweeper {
             // first move, so place bombs
             this.placeBombsExceptFor(row, col);
             this.moveMade = true;
+            this.observers.forEach(observer => {
+                observer.onGameStart();
+            })
         }
         
         this.openCell(row, col);
