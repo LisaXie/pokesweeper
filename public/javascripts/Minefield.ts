@@ -44,24 +44,6 @@ class Minefield {
         return this.cells[row][col] != null;
     }
 
-    /**
-     * Makes a move if the cell isn't flagged.
-     */
-    makeMove(row: number, col: number): void {
-        if (!this.isValidCell(row, col)) {
-            throw "Stepped on an invalid cell";
-        }
-
-        var cell = this.getCellAt(row, col);
-        if (!cell.flag) {
-            if (cell.bomb) {
-                this.steppedOnBomb = true;
-            }
-    
-            this.recursivelyOpen(cell);
-        }
-    }
-
     getCellAt(row: number, col: number): Cell {
         if (!this.isValidCell(row, col)) {
             throw "Invalid row or column value";
@@ -110,18 +92,6 @@ class Minefield {
         } while (cell.bomb);
 
         return cell;
-    }
-
-    private recursivelyOpen(cell: Cell): void {
-        cell.open = true;
-
-        if (cell.adjBombCount == 0) {
-            cell.adjCells.forEach(adjCell => {
-                if (!adjCell.open) {
-                    this.recursivelyOpen(adjCell);
-                }
-            });
-        }
     }
 	
     /**

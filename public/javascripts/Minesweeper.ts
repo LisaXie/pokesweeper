@@ -54,7 +54,7 @@ class Minesweeper {
             this.moveMade = true;
         }
         
-        this.field.makeMove(row, col);
+        this.openCell(row, col);
         this.notifyObservers();
     }
     
@@ -96,5 +96,35 @@ class Minesweeper {
             }
         }
         this.field.updateCellAdjacency();
+    }
+
+    /**
+     * Opens a cell if the cell isn't flagged.
+     */
+    protected openCell(row: number, col: number): void {
+        if (!this.isValidCell(row, col)) {
+            throw "Stepped on an invalid cell";
+        }
+
+        var cell = this.getCellAt(row, col);
+        if (!cell.flag) {
+            if (cell.bomb) {
+                this.field.steppedOnBomb = true;
+            }
+    
+            this.recursivelyOpenCell(cell);
+        }
+    }
+
+    protected recursivelyOpenCell(cell: Cell): void {
+        cell.open = true;
+
+        if (cell.adjBombCount == 0) {
+            cell.adjCells.forEach(adjCell => {
+                if (!adjCell.open) {
+                    this.recursivelyOpenCell(adjCell);
+                }
+            });
+        }
     }
 }
