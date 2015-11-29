@@ -37,7 +37,7 @@ class Pokesweeper implements MSObserver {
     }
     
     onVictory() {
-        console.log('WIN');
+        this.drawSprite();
     }
     
     private drawField(): void {
@@ -94,6 +94,23 @@ class Pokesweeper implements MSObserver {
         return 'cell' + row.toString() + '_' + col.toString();
     }
     
+    private drawSprite() {
+        $(this.fieldDomId).empty();
+        
+        for (var row = 0; row < this.rows; row++) {
+            $(this.fieldDomId).append('<div class="row" id="row' + row.toString() + '"></div>');
+            
+            for (var col = 0; col < this.cols; col++) {
+                if (this.ms.isValidCell(row, col)) {
+                    var cell = <ColorCell>this.ms.getCellAt(row, col);
+                    this.drawCellWith(cell.color, row, col, true, cell.adjBombCount, false);
+                } else {
+                    this.drawEmptyCell(row, col);
+                }
+            }
+        }
+    }
+    
     private drawEmptyCell(row, col) {
         var domCell = $('<div class="cell emptyCell"></div>');
         $('#row' + row.toString()).append(domCell);
@@ -101,6 +118,11 @@ class Pokesweeper implements MSObserver {
     
     private drawCell(row, col) {
         var cell = <ColorCell>this.ms.getCellAt(row, col);
+        this.drawCellWith(cell.color, row, col, cell.open, cell.adjBombCount, true);
+    }
+    
+    private drawCellWith(color: string, row: number, col: number,
+        open: boolean, adjBombCount: number, showCount: boolean) {
         
         var domCell = $('<div/>', {
             class: 'cell',
@@ -109,11 +131,11 @@ class Pokesweeper implements MSObserver {
             col: col
         });
         
-        if (cell.open) {
-            domCell.css('background-color', '#' + cell.color);
+        if (open) {
+            domCell.css('background-color', '#' + color);
             
-            if (cell.adjBombCount != 0) {
-                domCell.text(cell.adjBombCount);
+            if (adjBombCount != 0 && showCount) {
+                domCell.text(adjBombCount);
             }
         } else {
             domCell.addClass('unopenCell');
