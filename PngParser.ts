@@ -5,8 +5,6 @@ import pngjs = require('pngjs');
  * Takes a PNG file and converts it into a 2D array of RGBA colors as strings
  */
 class PngParser {
-    private static WHITE = 'ffffff';
-    
     /**
      * Parses the image at the specified location, and passes the generated 2D array into the callback
      */
@@ -44,6 +42,11 @@ class PngParser {
         var r = data[n * 4];
         var g = data[n * 4 + 1];
         var b = data[n * 4 + 2];
+        var a = data[n * 4 + 3];
+        
+        if (a == 0) {
+            return '';
+        }
 
         return this.toTwoDigHex(r) + this.toTwoDigHex(g) + this.toTwoDigHex(b);
     }
@@ -113,7 +116,7 @@ class PngParser {
     
     private static isEmptyRow(image, row): boolean {
         for (var col = 0; col < image[0].length; col++) {
-            if (image[row][col] != PngParser.WHITE) {
+            if (image[row][col] != '') {
                 return false;
             }
         }
@@ -122,7 +125,7 @@ class PngParser {
     
     private static isEmptyCol(image, col): boolean {
         for (var row = 0; row < image.length; row++) {
-            if (image[row][col] != PngParser.WHITE) {
+            if (image[row][col] != '') {
                 return false;
             }
         }
