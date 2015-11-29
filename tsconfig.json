@@ -17,6 +17,7 @@
 		"public/javascripts/RectMinesweeper.ts",
         "public/javascripts/ImageMinesweeper.ts",
 		"public/javascripts/TextMinesweeper.ts",
+		"public/javascripts/Timer.ts",
         
         "app.ts",
         "routes.ts",
