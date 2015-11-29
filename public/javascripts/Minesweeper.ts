@@ -30,10 +30,6 @@ class Minesweeper {
     }
 
     getCellAt(row: number, col: number): Cell {
-        if (!this.field.isValidCell(row, col)) {
-            throw "Invalid row or column value";
-        }
-
         return this.field.getCellAt(row, col);
     }
 
@@ -68,6 +64,15 @@ class Minesweeper {
                 observer.onWaitingInput();
             }
         });
+    }
+    
+    toggleFlag(row: number, col: number): void {
+        if (!this.isValidCell(row, col)) {
+            throw 'Tried to toggle flag on an invalid cell';
+        }
+        
+        var cell = this.getCellAt(row, col);
+        cell.flag = !cell.flag;
     }
 
     protected getField(): Minefield {

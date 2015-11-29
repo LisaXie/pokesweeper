@@ -57,10 +57,27 @@ class Pokesweeper implements MSObserver {
     }
     
     private bindCells(): void {
+        this.disableRightClick('.cell');
+        
         var _this = this;
-        $('.cell').click(function() {
+        
+        $('.cell').mouseup(function(event: JQueryEventObject) {
             var move = _this.getCellMove($(this));
-            _this.ms.makeMove(move.row, move.col);
+            
+            if (event.which == 1) {
+                // left click
+                _this.ms.makeMove(move.row, move.col);
+            }
+            if (event.which == 3) {
+                // right click
+                _this.ms.toggleFlag(move.row, move.col);
+            }
+        });
+    }
+    
+    private disableRightClick(tag: string): void {
+        $(tag).on('contextmenu', (event) => {
+            event.preventDefault();
         });
     }
     

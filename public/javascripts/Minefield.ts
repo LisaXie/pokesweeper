@@ -44,16 +44,22 @@ class Minefield {
         return this.cells[row][col] != null;
     }
 
+    /**
+     * Makes a move if the cell isn't flagged.
+     */
     makeMove(row: number, col: number): void {
         if (!this.isValidCell(row, col)) {
             throw "Stepped on an invalid cell";
         }
 
-        if (this.cells[row][col].bomb) {
-            this.steppedOnBomb = true;
+        var cell = this.getCellAt(row, col);
+        if (!cell.flag) {
+            if (cell.bomb) {
+                this.steppedOnBomb = true;
+            }
+    
+            this.recursivelyOpen(cell);
         }
-
-        this.recursivelyOpen(this.cells[row][col]);
     }
 
     getCellAt(row: number, col: number): Cell {
@@ -94,6 +100,17 @@ class Minefield {
             }
         }
     }
+	
+    /**
+     * Gets a cell without a bomb in it. Will not terminate if no such cell exists
+     */
+    getRandomCellWithoutBomb(): Cell {
+        do {
+            var cell = this.getRandomCell();
+        } while (cell.bomb);
+
+        return cell;
+    }
 
     private recursivelyOpen(cell: Cell): void {
         cell.open = true;
@@ -105,17 +122,6 @@ class Minefield {
                 }
             });
         }
-    }
-	
-    /**
-     * Gets a cell without a bomb in it. Will not terminate if no such cell exists
-     */
-    getRandomCellWithoutBomb(): Cell {
-        do {
-            var cell = this.getRandomCell();
-        } while (cell.bomb);
-
-        return cell;
     }
 	
     /**
