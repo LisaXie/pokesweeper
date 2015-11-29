@@ -1,5 +1,9 @@
 /// <reference path="Cell.ts" />
 
+/**
+ * Keeps track of the state of the cells and the field, and doesn't make
+ * changes to the state aside from updating cell adjacencies.
+ */
 class Minefield {
     steppedOnBomb: boolean;
     openCellCount: number;
@@ -92,6 +96,23 @@ class Minefield {
         } while (cell.bomb);
 
         return cell;
+    }
+    
+    hasWon(): boolean {
+        for (var row = 0; row < this.rows; row++) {
+            for (var col = 0; col < this.cols; col++) {
+                if (!this.isValidCell(row, col)) {
+                    continue;
+                }
+                
+                var cell = this.getCellAt(row, col);
+                
+                if ((cell.open && cell.bomb) || (!cell.open && !cell.bomb)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 	
     /**

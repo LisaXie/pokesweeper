@@ -72,8 +72,12 @@ class Minesweeper {
             if (this.field.steppedOnBomb) {
                 observer.onBombStepped();
             } else {
-                observer.onFieldChanged();
-                observer.onWaitingInput();
+                if (this.field.hasWon()) {
+                    observer.onVictory();
+                } else {
+                    observer.onFieldChanged();
+                    observer.onWaitingInput();
+                }
             }
         });
     }
