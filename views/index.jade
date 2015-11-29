@@ -12,9 +12,22 @@ block head
   script(src='javascripts/Pokesweeper.js')
   script(src='javascripts/names.js')
   script(src='javascripts/index.js')
+  
+  script(src='http://w.sharethis.com/button/buttons.js')
+  script.
+    stLight.options({
+      publisher: "7ae6aa00-a7db-4ac0-aa1c-521c34fb02c5", shorten: false,
+      doNotHash: true, doNotCopy: true, hashAddressBar: false});
 
 block content
   h1
     a(name='Pokesweeper' href='/') Pokesweeper
   select#dropdown(onchange='selectPokemon()')
   #field
+  #shareThis
+    span.st_facebook_hcount(displayText='Facebook')
+    span.st_twitter_hcount(displayText='Tweet')
+    span.st_tumblr_hcount(displayText='Tumblr')
+    span.st_googleplus_hcount(displayText='Google +')
+    span.st_reddit_hcount(displayText='Reddit')
+    
