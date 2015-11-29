@@ -11,6 +11,13 @@ class Pokesweeper implements MSObserver {
     private bombCount: number;
     private fieldDomId = '#field';
     private timer: Timer;
+    /**
+     * The key for Pokedex count in localStorage
+     */
+    private pokedexKey = 'pokedex';
+    private timeCounterDomId = '#timeCounter';
+    private highScoreDomId = '#highScoreCounter';
+    private pokedexDomId = '#pokedexCounter';
     
     constructor(cells: string[][]) {
         this.rows = cells.length;
@@ -19,7 +26,8 @@ class Pokesweeper implements MSObserver {
         this.ms.addObserver(this);
         this.drawField();
         this.bindCells();
-        this.timer = new Timer($('#timer'));
+        this.updateScores();
+        this.timer = new Timer($(this.timeCounterDomId));
     }
     
     onGameStart() {
@@ -37,11 +45,42 @@ class Pokesweeper implements MSObserver {
     
     onBombStepped() {
         console.log('stepped on a bomb!');
+        this.timer.stop();
     }
     
     onVictory() {
         this.drawSprite();
-        console.log(this.timer.stop());
+        this.saveScore(this.timer.stop());
+    }
+    
+    private saveScore(score: number): void {
+        if (!localStorage.getItem(currentId)) {
+            // Solved for the first time
+            localStorage.setItem(currentId, score.toString());
+            
+            var pokedex = localStorage.getItem(this.pokedexKey);
+            localStorage.setItem(this.pokedexKey, (parseInt(pokedex) + 1).toString());
+        } else {
+            var highscore = parseInt(localStorage.getItem(currentId));
+            localStorage.setItem(currentId, (Math.min(highscore, score)).toString());
+        }
+        
+        this.updateScores();
+    }
+    
+    private updateScores(): void {
+        if (!localStorage.getItem(currentId)) {
+            // Haven't solved this one yet
+            $(this.highScoreDomId).text('--');
+        } else {
+            $(this.highScoreDomId).text(localStorage.getItem(currentId));
+        }
+        
+        if (!localStorage.getItem(this.pokedexKey)) {
+            localStorage.setItem(this.pokedexKey, '0');
+        }
+        
+        $(this.pokedexDomId).text(localStorage.getItem(this.pokedexKey));
     }
     
     private drawField(): void {

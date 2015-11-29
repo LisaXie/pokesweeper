@@ -4,6 +4,7 @@ block head
   script.
     cells = !{JSON.stringify(cells)};
     currentId = '#{id}';
+  script(src='javascripts/Timer.js')
   script(src='javascripts/Cell.js')
   script(src='javascripts/ColorCell.js')
   script(src='javascripts/Minefield.js')
@@ -23,11 +24,25 @@ block content
   h1
     a(name='Pokesweeper' href='/') Pokesweeper
   select#dropdown(onchange='selectPokemon()')
+  #counters
+    #bombContainer.counterContainer
+      #bombCounter
+      #bombLabel BOMBS
+    #timeContainer.counterContainer
+      #timeCounter 0
+      #timeLabel TIME
+    #highScoreContainer.counterContainer
+      #highScoreCounter
+      #highScoreLabel BEST
+    #pokedexContainer.counterContainer
+      #pokedexCounter
+      #pokedexLabel POKÉDEX
   #field
+  
   #shareThis
-    span.st_facebook_hcount(displayText='Facebook')
-    span.st_twitter_hcount(displayText='Tweet')
-    span.st_tumblr_hcount(displayText='Tumblr')
-    span.st_googleplus_hcount(displayText='Google +')
-    span.st_reddit_hcount(displayText='Reddit')
+    span.st_facebook_hcount(displayText='Facebook' st_url='http://pokesweeper.takumifujimoto.com' st_title='Pokesweeper')
+    span.st_twitter_hcount(displayText='Tweet' st_url='http://pokesweeper.takumifujimoto.com' st_title='Pokesweeper')
+    span.st_tumblr_hcount(displayText='Tumblr' st_url='http://pokesweeper.takumifujimoto.com' st_title='Pokesweeper')
+    span.st_googleplus_hcount(displayText='Google +' st_url='http://pokesweeper.takumifujimoto.com' st_title='Pokesweeper')
+    span.st_reddit_hcount(displayText='Reddit' st_url='http://pokesweeper.takumifujimoto.com' st_title='Pokesweeper')
     
