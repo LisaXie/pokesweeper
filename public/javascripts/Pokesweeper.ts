@@ -32,7 +32,7 @@ class Pokesweeper implements MSObserver {
         this.bindCells();
     }
     
-    onBombStepped(row: number, col: number) {
+    onBombStepped() {
         console.log('stepped on a bomb!');
     }
     
@@ -67,8 +67,7 @@ class Pokesweeper implements MSObserver {
             if (event.which == 1) {
                 // left click
                 _this.ms.makeMove(move.row, move.col);
-            }
-            if (event.which == 3) {
+            } else if (event.which == 3) {
                 // right click
                 _this.ms.toggleFlag(move.row, move.col);
             }

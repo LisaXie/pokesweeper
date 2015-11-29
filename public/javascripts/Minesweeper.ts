@@ -55,15 +55,7 @@ class Minesweeper {
         }
         
         this.field.makeMove(row, col);
-
-        this.observers.forEach(observer => {
-            if (this.field.steppedOnBomb) {
-                observer.onBombStepped(row, col);
-            } else {
-                observer.onFieldChanged();
-                observer.onWaitingInput();
-            }
-        });
+        this.notifyObservers();
     }
     
     toggleFlag(row: number, col: number): void {
@@ -74,12 +66,23 @@ class Minesweeper {
         var cell = this.getCellAt(row, col);
         cell.flag = !cell.flag;
     }
+    
+    protected notifyObservers() {
+        this.observers.forEach(observer => {
+            if (this.field.steppedOnBomb) {
+                observer.onBombStepped();
+            } else {
+                observer.onFieldChanged();
+                observer.onWaitingInput();
+            }
+        });
+    }
 
     protected getField(): Minefield {
         throw "getField not implemented!";
     }
     
-    private placeBombsExceptFor(row: number, col: number): void {
+    protected placeBombsExceptFor(row: number, col: number): void {
         if (this.bombCount >= this.field.cellCount) {
             throw 'Too many bombs!';
         }
