@@ -14,6 +14,7 @@ block head
   script(src='javascripts/index.js')
 
 block content
-  h1 Pokesweeper
+  h1
+    a(name='Pokesweeper' href='/') Pokesweeper
   select#dropdown(onchange='selectPokemon()')
   #field
