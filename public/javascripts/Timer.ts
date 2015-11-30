@@ -15,6 +15,7 @@ class Timer {
     
     start(): void {
         this.time = 0;
+        this.element.text(0);
         this.running = true;
         setTimeout(() => this.update(), 1000);
     }
