@@ -164,7 +164,7 @@ class Pokesweeper implements MSObserver {
             for (var col = 0; col < this.cols; col++) {
                 if (this.ms.isValidCell(row, col)) {
                     var cell = <ColorCell>this.ms.getCellAt(row, col);
-                    this.drawCellWith(cell.color, row, col, true, cell.adjBombCount, false);
+                    this.drawCellWith(cell.color, row, col, true, false, cell.adjBombCount, false);
                 } else {
                     this.drawEmptyCell(row, col);
                 }
@@ -179,11 +179,11 @@ class Pokesweeper implements MSObserver {
     
     private drawCell(row, col) {
         var cell = <ColorCell>this.ms.getCellAt(row, col);
-        this.drawCellWith(cell.color, row, col, cell.open, cell.adjBombCount, true);
+        this.drawCellWith(cell.color, row, col, cell.open, cell.flag, cell.adjBombCount, true);
     }
     
-    private drawCellWith(color: string, row: number, col: number,
-        open: boolean, adjBombCount: number, showCount: boolean) {
+    private drawCellWith(color: string, row: number, col: number, open: boolean,
+        flag: boolean, adjBombCount: number, showCount: boolean) {
         
         var domCell = $('<div/>', {
             class: 'cell',
@@ -199,7 +199,11 @@ class Pokesweeper implements MSObserver {
                 domCell.text(adjBombCount);
             }
         } else {
-            domCell.addClass('unopenCell');
+            if (flag) {
+                domCell.addClass('flaggedCell');
+            } else {
+                domCell.addClass('unopenCell');
+            }
         }
         
         $('#row' + row.toString()).append(domCell);

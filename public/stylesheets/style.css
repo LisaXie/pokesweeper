@@ -60,3 +60,9 @@ a {
   background-image: none;
   background-color: #C0C0C0;
 }
+
+.flaggedCell {
+  cursor: pointer;
+  background-image: url('/images/pattern_flagged.png');
+  background-size: cover;
+}

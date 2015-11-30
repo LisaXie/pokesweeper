@@ -65,6 +65,8 @@ class Minesweeper {
         
         var cell = this.getCellAt(row, col);
         cell.flag = !cell.flag;
+        
+        this.notifyObservers();
     }
     
     protected notifyObservers() {
@@ -125,7 +127,7 @@ class Minesweeper {
 
         if (cell.adjBombCount == 0) {
             cell.adjCells.forEach(adjCell => {
-                if (!adjCell.open) {
+                if (!adjCell.open && !adjCell.flag) {
                     this.recursivelyOpenCell(adjCell);
                 }
             });
