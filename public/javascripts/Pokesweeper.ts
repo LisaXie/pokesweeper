@@ -49,8 +49,8 @@ class Pokesweeper implements MSObserver {
     }
     
     onBombStepped() {
-        console.log('stepped on a bomb!');
         this.timer.stop();
+        this.drawField();
         $(this.resetButtonDomId).css('background-image', this.sadButtonImage);
     }
     
@@ -99,6 +99,23 @@ class Pokesweeper implements MSObserver {
             for (var col = 0; col < this.cols; col++) {
                 if (this.ms.isValidCell(row, col)) {
                     this.drawCell(row, col);
+                } else {
+                    this.drawEmptyCell(row, col);
+                }
+            }
+        }
+    }
+    
+    private drawSprite() {
+        $(this.fieldDomId).empty();
+        
+        for (var row = 0; row < this.rows; row++) {
+            $(this.fieldDomId).append('<div class="row" id="row' + row.toString() + '"></div>');
+            
+            for (var col = 0; col < this.cols; col++) {
+                if (this.ms.isValidCell(row, col)) {
+                    var cell = <ColorCell>this.ms.getCellAt(row, col);
+                    this.drawCellWith(cell.color, row, col, true, false, false, cell.adjBombCount, false);
                 } else {
                     this.drawEmptyCell(row, col);
                 }
@@ -155,23 +172,6 @@ class Pokesweeper implements MSObserver {
         });
     }
     
-    private drawSprite() {
-        $(this.fieldDomId).empty();
-        
-        for (var row = 0; row < this.rows; row++) {
-            $(this.fieldDomId).append('<div class="row" id="row' + row.toString() + '"></div>');
-            
-            for (var col = 0; col < this.cols; col++) {
-                if (this.ms.isValidCell(row, col)) {
-                    var cell = <ColorCell>this.ms.getCellAt(row, col);
-                    this.drawCellWith(cell.color, row, col, true, false, cell.adjBombCount, false);
-                } else {
-                    this.drawEmptyCell(row, col);
-                }
-            }
-        }
-    }
-    
     private drawEmptyCell(row, col) {
         var domCell = $('<div class="cell emptyCell"></div>');
         $('#row' + row.toString()).append(domCell);
@@ -179,11 +179,11 @@ class Pokesweeper implements MSObserver {
     
     private drawCell(row, col) {
         var cell = <ColorCell>this.ms.getCellAt(row, col);
-        this.drawCellWith(cell.color, row, col, cell.open, cell.flag, cell.adjBombCount, true);
+        this.drawCellWith(cell.color, row, col, cell.open, cell.flag, cell.bomb, cell.adjBombCount, true);
     }
     
     private drawCellWith(color: string, row: number, col: number, open: boolean,
-        flag: boolean, adjBombCount: number, showCount: boolean) {
+        flag: boolean, bomb: boolean, adjBombCount: number, showCount: boolean) {
         
         var domCell = $('<div/>', {
             class: 'cell',
@@ -193,10 +193,14 @@ class Pokesweeper implements MSObserver {
         });
         
         if (open) {
-            domCell.css('background-color', '#' + color);
-            
-            if (adjBombCount != 0 && showCount) {
-                domCell.text(adjBombCount);
+            if (bomb) {
+                domCell.addClass('bombCell');
+            } else {
+                domCell.css('background-color', '#' + color);
+                
+                if (adjBombCount != 0 && showCount) {
+                    domCell.text(adjBombCount);
+                }
             }
         } else {
             if (flag) {

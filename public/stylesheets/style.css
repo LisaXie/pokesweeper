@@ -48,12 +48,12 @@ a {
   text-align: center;
   vertical-align: middle;
   cursor: default;
+  background-size: cover;
 }
 
 .unopenCell {
   cursor: pointer;
   background-image: url('/images/pattern.png');
-  background-size: cover;
 }
 
 .unopenCell:active {
@@ -64,5 +64,9 @@ a {
 .flaggedCell {
   cursor: pointer;
   background-image: url('/images/pattern_flagged.png');
-  background-size: cover;
+}
+
+.bombCell {
+  cursor: pointer;
+  background-image: url('/images/bomb_cell.png');
 }
