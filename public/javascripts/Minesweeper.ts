@@ -3,7 +3,7 @@
 /// <reference path="MSObserver.ts" />
 
 /**
- * An "abstract" class for one game instance of minesweeper
+ * An "abstract" class for multiple game instances of minesweeper
  */
 class Minesweeper {
     protected field: Minefield;
@@ -11,18 +11,17 @@ class Minesweeper {
     protected cols: number;
     protected bombCount: number;
     protected observers: MSObserver[];
-    protected moveMade = false;
+    protected moveMade: boolean;
 
     constructor() {
-        this.field = this.getField();
         this.observers = [];
+        this.init();
     }
 
-    play(): void {
-        this.observers.forEach(observer => {
-            observer.onGameStart();
-            observer.onWaitingInput();
-        });
+    init(): void {
+        this.field = this.getField();
+        this.moveMade = false;
+        this.notifyObservers();
     }
 
     addObserver(observer: MSObserver): void {
@@ -46,8 +45,6 @@ class Minesweeper {
     }
 
     makeMove(row: number, col: number): void {
-        console.log([row, col]);
-        
         if (!this.moveMade) {
             // first move, so place bombs
             this.placeBombsExceptFor(row, col);
