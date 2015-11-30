@@ -18,6 +18,10 @@ class Pokesweeper implements MSObserver {
     private timeCounterDomId = '#timeCounter';
     private highScoreDomId = '#highScoreCounter';
     private pokedexDomId = '#pokedexCounter';
+    private resetButtonDomId = '#resetButton';
+    private resetButtonImage = 'url("/images/pikachu_button.png")';
+    private happyButtonImage = 'url("/images/pikachu_button_happy.png")';
+    private sadButtonImage = 'url("/images/pikachu_button_sad.png")';
     
     constructor(cells: string[][]) {
         this.rows = cells.length;
@@ -26,6 +30,7 @@ class Pokesweeper implements MSObserver {
         this.ms.addObserver(this);
         this.drawField();
         this.bindCells();
+        this.bindResetButton();
         this.updateScores();
         this.timer = new Timer($(this.timeCounterDomId));
     }
@@ -46,11 +51,13 @@ class Pokesweeper implements MSObserver {
     onBombStepped() {
         console.log('stepped on a bomb!');
         this.timer.stop();
+        $(this.resetButtonDomId).css('background-image', this.sadButtonImage);
     }
     
     onVictory() {
         this.drawSprite();
         this.saveScore(this.timer.stop());
+        $(this.resetButtonDomId).css('background-image', this.happyButtonImage);
     }
     
     private saveScore(score: number): void {
@@ -135,6 +142,17 @@ class Pokesweeper implements MSObserver {
      */
     private getCellId(row: number, col: number): string {
         return 'cell' + row.toString() + '_' + col.toString();
+    }
+    
+    private bindResetButton(): void {
+        $(this.resetButtonDomId).mousedown(function() {
+            $(this).removeAttr('style'); // remove hardcoded CSS style
+        });
+        
+        $(this.resetButtonDomId).click(() => {
+            this.ms.init();
+            this.timer.stop();
+        });
     }
     
     private drawSprite() {

@@ -20,6 +20,18 @@ a {
   width: 100px;
 }
 
+#resetButton {
+  height: 40px;
+  width: 40px;
+  background-image: url('/images/pikachu_button.png');
+  background-size: cover;
+  cursor: pointer;
+}
+
+#resetButton:active {
+  background-image: url('/images/pikachu_button_pressed.png');
+}
+
 /****************** GAME STUFF ******************/
 
 .row {
