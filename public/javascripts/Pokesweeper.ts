@@ -2,6 +2,7 @@
 /// <reference path="Minesweeper.ts" />
 /// <reference path="ImageMinesweeper.ts" />
 /// <reference path="Timer.ts" />
+/// <reference path="PokeUtil.ts" />
 /// <reference path="../../typings/jquery/jquery.d.ts" />
 
 class Pokesweeper implements MSObserver {
@@ -27,7 +28,7 @@ class Pokesweeper implements MSObserver {
     constructor(cells: string[][]) {
         this.rows = cells.length;
         this.cols = cells[0].length;
-        this.ms = new ImageMinesweeper(cells, 10);
+        this.ms = new ImageMinesweeper(cells, PokeUtil.getBombRatio());
         this.ms.addObserver(this);
         this.drawField();
         this.bindCells();
