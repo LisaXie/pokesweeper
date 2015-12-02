@@ -3,5 +3,5 @@
 bin/
 node_modules/
 typings/
+sprites/
 *.js
-*.png
