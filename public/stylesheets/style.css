@@ -70,6 +70,10 @@ h1#pageTitle {
   overflow: auto;
 }
 
+#cache {
+  display: none;
+}
+
 /****************** GAME STUFF ******************/
 
 .row {

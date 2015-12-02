@@ -1,8 +1,9 @@
 /// <reference path="Pokesweeper.ts" />
 
 $(() => {
-    var game = new Pokesweeper(cells);
+    loadImages();
     initDropdown();
+    var game = new Pokesweeper(cells);
 });
 
 function initDropdown(): void {
@@ -44,3 +45,20 @@ function chooseRandomUnsolved(): void {
     }
 }
 
+function loadImages(): void {
+    var names = [
+        'bomb_cell',
+        'pattern_flagged',
+        'pattern',
+        'pikachu_button_happy',
+        'pikachu_button_pressed',
+        'pikachu_button_sad',
+        'pikachu_button'
+    ];
+    
+    names.forEach(name => {
+        $('#cache').append($('<img/>', {
+            src: '/images/' + name + '.png'
+        }));
+    });
+}
