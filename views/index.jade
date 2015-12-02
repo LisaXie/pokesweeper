@@ -23,7 +23,10 @@ block head
 block content
   h1
     a(name='Pokesweeper' href='/') Pokesweeper
-  select#dropdown(onchange='selectPokemon()')
+  #selectionContainer
+    select#dropdown(onchange='selectPokemon()')
+    button#random(onclick='chooseRandom()') Random Pokémon
+    button#randomUnsolved(onclick='chooseRandomUnsolved()') Random unsolved Pokémon
   #resetButton
   #counters
     #bombContainer.counterContainer
