@@ -12,17 +12,49 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: black;
+  text-decoration: none;
+}
+
+#content {
+  width: 850px;
+  margin: auto;
+}
+
+h1#pageTitle {
+  text-align: center;
+}
+
+#selectionContainer {
+  width: intrinsic;
+  margin: auto;
+}
+
+.selectionClickable {
+  width: 180px;
+  margin: 10px;
+}
+
+#counters {
+  width: intrinsic;
+  margin: 10px auto;
+  overflow: auto;
 }
 
 .counterContainer {
   float: left;
-  width: 100px;
+  width: 150px;
+  text-align: center;
+}
+
+.counter {
+  font-size: 20px;
 }
 
 #resetButton {
   height: 40px;
   width: 40px;
+  margin: 10px auto;
   background-image: url('/images/pikachu_button.png');
   background-size: cover;
   cursor: pointer;
@@ -32,10 +64,17 @@ a {
   background-image: url('/images/pikachu_button_pressed.png');
 }
 
+#field {
+  width: intrinsic;
+  margin: 20px auto;
+  overflow: auto;
+}
+
 /****************** GAME STUFF ******************/
 
 .row {
   clear: both;
+  overflow: auto;
 }
 
 .cell {

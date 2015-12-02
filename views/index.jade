@@ -22,26 +22,26 @@ block head
       doNotHash: true, doNotCopy: true, hashAddressBar: false});
 
 block content
-  h1
+  h1#pageTitle
     a(name='Pokesweeper' href='/') Pokesweeper
   #selectionContainer
-    select#dropdown(onchange='selectPokemon()')
-    button#random(onclick='chooseRandom()') Random Pokémon
-    button#randomUnsolved(onclick='chooseRandomUnsolved()') Random unsolved Pokémon
-  #resetButton
+    select#dropdown.selectionClickable(onchange='selectPokemon()')
+    button#random.selectionClickable(onclick='chooseRandom()') Random Pokémon
+    button#randomUnsolved.selectionClickable(onclick='chooseRandomUnsolved()') Random unsolved Pokémon
   #counters
     #bombContainer.counterContainer
-      #bombCounter
+      #bombCounter.counter
       #bombLabel BOMBS
     #timeContainer.counterContainer
-      #timeCounter 0
+      #timeCounter.counter 0
       #timeLabel TIME
     #highScoreContainer.counterContainer
-      #highScoreCounter
+      #highScoreCounter.counter
       #highScoreLabel BEST
     #pokedexContainer.counterContainer
-      #pokedexCounter
+      #pokedexCounter.counter
       #pokedexLabel POKÉDEX
+  #resetButton
   #field
   
   #shareThis
