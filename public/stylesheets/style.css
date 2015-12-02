@@ -16,6 +16,10 @@ a {
   text-decoration: none;
 }
 
+p {
+  text-align: center;
+}
+
 #content {
   width: 850px;
   margin: auto;
@@ -71,6 +75,11 @@ h1#pageTitle {
 }
 
 #footer {
+  width: intrinsic;
+  margin: 20px auto;
+}
+
+#share {
   width: intrinsic;
   margin: 20px auto;
 }
