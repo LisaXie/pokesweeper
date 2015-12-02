@@ -12,7 +12,7 @@ body {
 }
 
 a {
-  color: black;
+  color: #606060;
   text-decoration: none;
 }
 
@@ -66,8 +66,13 @@ h1#pageTitle {
 
 #field {
   width: intrinsic;
-  margin: 20px auto;
+  margin: 20px auto 70px auto;
   overflow: auto;
+}
+
+#footer {
+  width: intrinsic;
+  margin: 20px auto;
 }
 
 #cache {
