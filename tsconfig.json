@@ -18,7 +18,7 @@
 		"public/javascripts/PokeUtil.ts",
 		"public/javascripts/Timer.ts",
         
-        "app.ts",
+        "server.ts",
         "routes.ts",
 		"PngParser.ts"
 	]
