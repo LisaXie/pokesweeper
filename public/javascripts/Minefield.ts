@@ -8,6 +8,7 @@ class Minefield {
     steppedOnBomb: boolean;
     openCellCount: number;
     cellCount: number;
+    flagCount: number;
     private cells: Cell[][];
     private rows: number;
     private cols: number;
@@ -28,6 +29,7 @@ class Minefield {
     init(): void {
         this.steppedOnBomb = false;
         this.openCellCount = 0;
+        this.flagCount = 0;
 
         this.cells.forEach(row => {
             row.forEach(cell => {

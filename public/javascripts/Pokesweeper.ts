@@ -18,6 +18,7 @@ class Pokesweeper implements MSObserver {
     private timeCounterDomId = '#timeCounter';
     private highScoreDomId = '#highScoreCounter';
     private pokedexDomId = '#pokedexCounter';
+    private bombCountDomId = '#bombCounter';
     private resetButtonDomId = '#resetButton';
     private resetButtonImage = 'url("/images/pikachu_button.png")';
     private happyButtonImage = 'url("/images/pikachu_button_happy.png")';
@@ -32,6 +33,7 @@ class Pokesweeper implements MSObserver {
         this.bindCells();
         this.bindResetButton();
         this.updateScores();
+        this.updateBombCount(this.ms.getRemainingBombCount());
         this.timer = new Timer($(this.timeCounterDomId));
     }
     
@@ -45,6 +47,7 @@ class Pokesweeper implements MSObserver {
     
     onFieldChanged() {
         this.drawField();
+        this.updateBombCount(this.ms.getRemainingBombCount());
         this.bindCells();
     }
     
@@ -58,6 +61,10 @@ class Pokesweeper implements MSObserver {
         this.drawSprite();
         this.saveScore(this.timer.stop());
         $(this.resetButtonDomId).css('background-image', this.happyButtonImage);
+    }
+    
+    private updateBombCount(bombs: number) {
+        $(this.bombCountDomId).text(bombs);
     }
     
     private saveScore(score: number): void {

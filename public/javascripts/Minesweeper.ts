@@ -66,7 +66,20 @@ class Minesweeper {
         var cell = this.getCellAt(row, col);
         cell.flag = !cell.flag;
         
+        if (cell.flag) {
+            this.field.flagCount++;
+        } else {
+            this.field.flagCount--;
+        }
+        
         this.notifyObservers();
+    }
+    
+    /**
+     * Gets the number of bombs minus flags
+     */
+    getRemainingBombCount(): number {
+        return this.bombCount - this.field.flagCount;
     }
     
     protected notifyObservers() {
