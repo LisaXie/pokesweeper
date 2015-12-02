@@ -6,17 +6,16 @@
 	"files": [
 		"typings/tsd.d.ts",
         
-		"public/javascripts/index.ts",
-		"public/javascripts/names.ts",
 		"public/javascripts/Cell.ts",
         "public/javascripts/ColorCell.ts",
-		"public/javascripts/Input.ts",
+        "public/javascripts/ImageMinesweeper.ts",
+		"public/javascripts/index.ts",
 		"public/javascripts/Minefield.ts",
 		"public/javascripts/Minesweeper.ts",
 		"public/javascripts/MSObserver.ts",
-		"public/javascripts/RectMinesweeper.ts",
-        "public/javascripts/ImageMinesweeper.ts",
-		"public/javascripts/TextMinesweeper.ts",
+		"public/javascripts/names.ts",
+		"public/javascripts/Pokesweeper.ts",
+		"public/javascripts/PokeUtil.ts",
 		"public/javascripts/Timer.ts",
         
         "app.ts",
