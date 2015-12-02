@@ -21,4 +21,18 @@ class PokeUtil {
         
         return 0.1 + ((id - lowerLimit) / (upperLimit - lowerLimit)) * (upper - lower);
     }
+    
+    /**
+     * Returns a random string in 001 through 721.
+     */
+    static getRandomPokemonId(): string {
+        var total = PokeUtil.getPokemonTotalCount();
+        var index = Math.ceil(Math.random() * total);
+        
+        return ('00' + index.toString()).substr(-3);
+    }
+    
+    static getPokemonTotalCount(): number {
+        return 721;
+    }
 }
