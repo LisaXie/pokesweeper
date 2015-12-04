@@ -30,12 +30,11 @@ class Pokesweeper implements MSObserver {
         this.cols = cells[0].length;
         this.ms = new ImageMinesweeper(cells, PokeUtil.getBombRatio());
         this.ms.addObserver(this);
-        this.initField();
-        this.bindCells();
         this.bindResetButton();
         this.updateScores();
         this.updateBombCount(this.ms.getRemainingBombCount());
         this.timer = new Timer($(this.timeCounterDomId));
+        this.initField();
     }
     
     onGameStart() {
@@ -103,39 +102,6 @@ class Pokesweeper implements MSObserver {
         }
         
         $(this.pokedexDomId).text(localStorage.getItem(this.pokedexKey));
-    }
-    
-    private drawInitialField(): void {
-        $(this.fieldDomId).empty();
-        
-        for (var row = 0; row < this.rows; row++) {
-            $(this.fieldDomId).append('<div class="row" id="row' + row.toString() + '"></div>');
-            
-            for (var col = 0; col < this.cols; col++) {
-                if (this.ms.isValidCell(row, col)) {
-                    this.drawCell(row, col);
-                } else {
-                    this.drawEmptyCell(row, col);
-                }
-            }
-        }
-    }
-    
-    private drawSprite() {
-        $(this.fieldDomId).empty();
-        
-        for (var row = 0; row < this.rows; row++) {
-            $(this.fieldDomId).append('<div class="row" id="row' + row.toString() + '"></div>');
-            
-            for (var col = 0; col < this.cols; col++) {
-                if (this.ms.isValidCell(row, col)) {
-                    var cell = <ColorCell>this.ms.getCellAt(row, col);
-                    this.drawCellWith(cell.color, row, col, true, false, false, cell.adjBombCount, false);
-                } else {
-                    this.drawEmptyCell(row, col);
-                }
-            }
-        }
     }
     
     private bindCells(): void {
@@ -209,12 +175,8 @@ class Pokesweeper implements MSObserver {
         if (cell.open) {
             if (cell.bomb) {
                 domCell.addClass('bombCell');
-            } else {
-                domCell.css('background-color', '#' + cell.color);
-                
-                if (cell.adjBombCount !== 0) {
-                    domCell.text(cell.adjBombCount);
-                }
+            } else if (cell.adjBombCount !== 0) {
+                domCell.text(cell.adjBombCount);
             }
         } else {
             if (cell.flag) {
@@ -230,44 +192,42 @@ class Pokesweeper implements MSObserver {
         domCell.removeClass('flaggedCell');
     }
     
-    private drawEmptyCell(row, col) {
-        var domCell = $('<div class="cell emptyCell"></div>');
-        $('#row' + row.toString()).append(domCell);
-    }
-    
-    private drawCell(row, col) {
-        var cell = <ColorCell>this.ms.getCellAt(row, col);
-        this.drawCellWith(cell.color, row, col, cell.open, cell.flag, cell.bomb, cell.adjBombCount, true);
-    }
-    
-    private drawCellWith(color: string, row: number, col: number, open: boolean,
-        flag: boolean, bomb: boolean, adjBombCount: number, showCount: boolean) {
+    private drawInitialField(): void {
+        $(this.fieldDomId).empty();
         
-        var domCell = $('<div/>', {
-            class: 'cell',
-            id: this.getCellId(row, col),
-            row: row,
-            col: col
-        });
-        
-        if (open) {
-            if (bomb) {
-                domCell.addClass('bombCell');
-            } else {
-                domCell.css('background-color', '#' + color);
-                
-                if (adjBombCount != 0 && showCount) {
-                    domCell.text(adjBombCount);
+        for (var row = 0; row < this.rows; row++) {
+            $(this.fieldDomId).append('<div class="row" id="row' + row.toString() + '"></div>');
+            
+            for (var col = 0; col < this.cols; col++) {
+                if (this.ms.isValidCell(row, col)) {
+                    var domCell = this.getInitialDomCell(<ColorCell>this.ms.getCellAt(row, col));
+                } else {
+                    var domCell = this.getEmptyCell();
                 }
-            }
-        } else {
-            if (flag) {
-                domCell.addClass('flaggedCell');
-            } else {
-                domCell.addClass('unopenCell');
+                $('#row' + row.toString()).append(domCell);
             }
         }
+    }
+    
+    private drawSprite() {
+        $('.cell').text('');
+        $('.cell').css('background-image', 'none');
+    }
+    
+    private getEmptyCell() {
+        return $('<div class="cell emptyCell"></div>');
+    }
+    
+    private getInitialDomCell(cell: ColorCell) {
         
-        $('#row' + row.toString()).append(domCell);
+        var domCell = $('<div/>', {
+            class: 'cell unopenCell',
+            id: this.getCellId(cell.row, cell.col),
+            row: cell.row,
+            col: cell.col
+        });
+        
+        domCell.css('background-color', '#' + cell.color);
+        return domCell;
     }
 }
