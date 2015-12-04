@@ -109,23 +109,25 @@ class Pokesweeper implements MSObserver {
         
         this.disableRightClick('.cell');
         
-        $('.cell').mouseup((event: JQueryEventObject) => {
+        $('.cell').mouseup((event) => {
             var move = this.getCellMove($(event.target));
             
             if (event.which == 1 && !longPress) {
                 // left click
                 this.ms.makeMove(move.row, move.col);
-            } else if (event.which == 3 || longPress) {
+            } else if (event.which == 3) {
                 // right click or long press
                 this.ms.toggleFlag(move.row, move.col);
-                longPress = false;
             }
+            longPress = false;
         });
         
         // Trigger taphold after 300ms
         $.event.special.tap.tapholdThreshold = 300;
         
         $('.cell').on('taphold', (event) => {
+            longPress = true;
+            
             var move = this.getCellMove($(event.target));
             this.ms.toggleFlag(move.row, move.col);
             navigator.vibrate(1);
