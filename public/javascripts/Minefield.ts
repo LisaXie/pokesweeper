@@ -30,14 +30,17 @@ class Minefield {
         this.steppedOnBomb = false;
         this.openCellCount = 0;
         this.flagCount = 0;
-
-        this.cells.forEach(row => {
-            row.forEach(cell => {
+        
+        for (var row = 0; row < this.rows; row++) {
+            for (var col = 0; col < this.cols; col++) {
+                var cell = this.cells[row][col];
                 if (cell != null) {
                     cell.open = false;
+                    cell.row = row;
+                    cell.col = col;
                 }
-            });
-        });
+            }
+        }
 
         this.updateCellAdjacency();
     }

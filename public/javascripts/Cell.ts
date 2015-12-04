@@ -4,6 +4,8 @@ class Cell {
     flag: boolean;
     adjBombCount: number;
     adjCells: Cell[];
+    row: number;
+    col: number;
     
     constructor(bomb: boolean) {
         this.bomb = bomb;
