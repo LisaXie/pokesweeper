@@ -72,7 +72,9 @@ class Minesweeper {
             this.field.flagCount--;
         }
         
-        this.notifyObservers();
+        this.observers.forEach(observer => {
+            observer.onCellChanged(cell);
+        });
     }
     
     /**
@@ -137,6 +139,10 @@ class Minesweeper {
 
     protected recursivelyOpenCell(cell: Cell): void {
         cell.open = true;
+        
+        this.observers.forEach((observer) => {
+            observer.onCellChanged(cell);
+        })
 
         if (cell.adjBombCount == 0) {
             cell.adjCells.forEach(adjCell => {

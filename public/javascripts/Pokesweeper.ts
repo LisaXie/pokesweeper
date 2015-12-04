@@ -30,7 +30,7 @@ class Pokesweeper implements MSObserver {
         this.cols = cells[0].length;
         this.ms = new ImageMinesweeper(cells, PokeUtil.getBombRatio());
         this.ms.addObserver(this);
-        this.drawField();
+        this.initField();
         this.bindCells();
         this.bindResetButton();
         this.updateScores();
@@ -47,14 +47,16 @@ class Pokesweeper implements MSObserver {
     }
     
     onFieldChanged() {
-        this.drawField();
         this.updateBombCount(this.ms.getRemainingBombCount());
-        this.bindCells();
+    }
+    
+    onCellChanged(cell: Cell) {
+        this.updateCell(<ColorCell>cell);
     }
     
     onBombStepped() {
         this.timer.stop();
-        this.drawField();
+        $('.cell').unbind();
         $(this.resetButtonDomId).css('background-image', this.sadButtonImage);
     }
     
@@ -62,6 +64,11 @@ class Pokesweeper implements MSObserver {
         this.drawSprite();
         this.saveScore(this.timer.stop());
         $(this.resetButtonDomId).css('background-image', this.happyButtonImage);
+    }
+    
+    private initField(): void {
+        this.drawInitialField();
+        this.bindCells();
     }
     
     private updateBombCount(bombs: number) {
@@ -98,7 +105,7 @@ class Pokesweeper implements MSObserver {
         $(this.pokedexDomId).text(localStorage.getItem(this.pokedexKey));
     }
     
-    private drawField(): void {
+    private drawInitialField(): void {
         $(this.fieldDomId).empty();
         
         for (var row = 0; row < this.rows; row++) {
@@ -191,7 +198,36 @@ class Pokesweeper implements MSObserver {
         $(this.resetButtonDomId).click(() => {
             this.ms.init();
             this.timer.stop();
+            this.initField();
         });
+    }
+    
+    private updateCell(cell: ColorCell): void {
+        var domCell = $('#cell' + cell.row.toString() + '_' + cell.col.toString());
+        this.removeCellClasses(domCell);
+        
+        if (cell.open) {
+            if (cell.bomb) {
+                domCell.addClass('bombCell');
+            } else {
+                domCell.css('background-color', '#' + cell.color);
+                
+                if (cell.adjBombCount !== 0) {
+                    domCell.text(cell.adjBombCount);
+                }
+            }
+        } else {
+            if (cell.flag) {
+                domCell.addClass('flaggedCell');
+            } else {
+                domCell.addClass('unopenCell');
+            }
+        }
+    }
+    
+    private removeCellClasses(domCell: JQuery): void {
+        domCell.removeClass('unopenCell');
+        domCell.removeClass('flaggedCell');
     }
     
     private drawEmptyCell(row, col) {
