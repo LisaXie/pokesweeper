@@ -155,7 +155,7 @@ class Pokesweeper implements MSObserver {
             
             setTimeout(() => {
                 if (mouseDown) {
-                    navigator.vibrate(50);
+                    navigator.vibrate(1);
                     var move = this.getCellMove($(event.target));
                     this.ms.toggleFlag(move.row, move.col);
                 }
