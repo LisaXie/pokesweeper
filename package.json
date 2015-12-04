@@ -1,6 +1,6 @@
 {
   "name": "pokesweeper",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./server"
@@ -16,5 +16,10 @@
     "morgan": "~1.6.1",
     "pngjs": "^2.1.0",
     "serve-favicon": "~2.3.0"
-  }
+  },
+  "engines": {
+    "node": ">= 5.1.0",
+    "npm": ">= 3.3.12"
+  },
+  "main": "server.js"
 }

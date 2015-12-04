@@ -9,14 +9,14 @@ import http = require('http');
 import routes = require('./routes');
 
 var app = express();
-var port = 8080;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -57,4 +57,4 @@ app.use(function(err, req, res, next) {
 });
 
 var server = http.createServer(app);
-server.listen(port);
+server.listen(port, ip);
