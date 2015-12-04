@@ -122,18 +122,13 @@ class Pokesweeper implements MSObserver {
             }
         });
         
-        // $('.cell').mousedown((event: JQueryEventObject) => {
-        //     longPress = false;
-            
-        //     setTimeout(() => {
-        //         navigator.vibrate(1);
-        //         longPress = true;
-        //     }, 300);
-        // });
+        // Trigger taphold after 300ms
+        $.event.special.tap.tapholdThreshold = 300;
         
         $('.cell').on('taphold', (event) => {
             var move = this.getCellMove($(event.target));
             this.ms.toggleFlag(move.row, move.col);
+            navigator.vibrate(1);
         });
     }
     
