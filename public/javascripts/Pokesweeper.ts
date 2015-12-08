@@ -51,6 +51,7 @@ class Pokesweeper implements MSObserver {
     
     onCellChanged(cell: Cell) {
         this.updateCell(<ColorCell>cell);
+        this.updateBombCount(this.ms.getRemainingBombCount());
     }
     
     onBombStepped() {
