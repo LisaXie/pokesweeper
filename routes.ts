@@ -13,7 +13,7 @@ router.get('/pokedex', function(req, res, next) {
 })
 
 router.get('/:id', function(req, res, next) {
-    PngParser.parseImage('sprites/' + req.params.id + '.png', (err, cells) => {
+    PngParser.parseImage('public/images/sprites/' + req.params.id + '.png', (err, cells) => {
         if (err) {
             console.log('error!');
             res.render('error', { error: err });
