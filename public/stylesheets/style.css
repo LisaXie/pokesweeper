@@ -134,6 +134,10 @@ h1#pageTitle {
   height: inherit;
 }
 
+.pokedexNonSolved {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
 .flaggedCell {
   cursor: pointer;
   background-image: url('/images/pattern_flagged.png');

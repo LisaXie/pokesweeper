@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/pokedex', function(req, res, next) {
-	res.render('pokedex');
+    res.render('pokedex');
 })
 
 router.get('/:id', function(req, res, next) {
