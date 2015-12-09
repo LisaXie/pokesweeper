@@ -45,6 +45,10 @@ function chooseRandomUnsolved(): void {
     }
 }
 
+function viewPokedex(): void {
+    window.location.replace('/pokedex');
+}
+
 function loadImages(): void {
     var names = [
         'bomb_cell',

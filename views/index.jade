@@ -5,6 +5,7 @@ block head
     cells = !{JSON.stringify(cells)};
     currentId = '#{id}';
   script(src='javascripts/jquery.mobile.custom.min.js')
+  script(src='javascripts/names.js')
   script(src='javascripts/Timer.js')
   script(src='javascripts/Cell.js')
   script(src='javascripts/ColorCell.js')
@@ -13,16 +14,16 @@ block head
   script(src='javascripts/ImageMinesweeper.js')
   script(src='javascripts/PokeUtil.js')
   script(src='javascripts/Pokesweeper.js')
-  script(src='javascripts/names.js')
   script(src='javascripts/index.js')
 
 block content
   h1#pageTitle
-    a(name='Pokesweeper' href='/') Pokesweeper
+    a(name='Pokesweeper' href='/') Pokésweeper
   #selectionContainer
     select#dropdown.selectionClickable(onchange='selectPokemon()')
     button#random.selectionClickable(onclick='chooseRandom()') Random Pokémon
     button#randomUnsolved.selectionClickable(onclick='chooseRandomUnsolved()') Random unsolved Pokémon
+    button#viewPokedex.selectionClickable(onclick='viewPokedex()') View the Pokédex
   #counters
     #bombContainer.counterContainer
       #bombCounter.counter
