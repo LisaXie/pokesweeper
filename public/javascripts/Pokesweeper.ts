@@ -233,7 +233,7 @@ class Pokesweeper implements MSObserver {
 
     private bindPokedexButton(): void {
         $('#pokedexContainer').click(() => {
-            window.location.replace('pokedex');
+            window.open('pokedex', '_newtab');
         });
     }
 }
