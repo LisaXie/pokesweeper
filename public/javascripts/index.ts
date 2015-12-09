@@ -8,7 +8,7 @@ $(() => {
 
 function initDropdown(): void {
     for (var i = 1; i < names.length; i++) {
-        var id = ('00' + i.toString()).substr(-3);
+        var id = PokeUtil.getIndexStr(i);
         var option = $('<option/>', {
             value: id,
             id: 'dropdown' + id,

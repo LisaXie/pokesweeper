@@ -28,10 +28,21 @@ class PokeUtil {
         var total = PokeUtil.getPokemonTotalCount();
         var index = Math.ceil(Math.random() * total);
         
-        return ('00' + index.toString()).substr(-3);
+        return PokeUtil.getIndexStr(index);
     }
     
     static getPokemonTotalCount(): number {
         return 721;
+    }
+    
+    /**
+     * Turns an index into its string representation, e.g. 25 to '025'
+     */
+    static getIndexStr(index: number): string {
+        return ('00' + index.toString()).substr(-3);
+    }
+    
+    static isSolved(index: string): boolean {
+        return localStorage.getItem(index) !== null;
     }
 }
