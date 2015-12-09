@@ -8,6 +8,10 @@ router.get('/', function(req, res, next) {
     res.redirect('/001');
 });
 
+router.get('/pokedex', function(req, res, next) {
+    res.render('pokedex');
+})
+
 router.get('/:id', function(req, res, next) {
     PngParser.parseImage('sprites/' + req.params.id + '.png', (err, cells) => {
         if (err) {

@@ -118,6 +118,26 @@ h1#pageTitle {
   background-color: #C0C0C0;
 }
 
+#pokedexGrid {
+  width: 550px;
+  margin: auto;
+}
+
+.pokedexCell{
+  display: inline;
+  width:55px;
+  height: 55px;
+}
+
+.pokedexSprite {
+  width: inherit;
+  height: inherit;
+}
+
+.pokedexNonSolved {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
 .flaggedCell {
   cursor: pointer;
   background-image: url('/images/pattern_flagged.png');
