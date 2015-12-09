@@ -15,10 +15,9 @@ class PokeUtil {
             if (limits[i] >= id) {
                 var lowerLimit = limits[i - 1];
                 var upperLimit = limits[i];
-                break;
+                break;  
             }
         }
-        
         return 0.1 + ((id - lowerLimit) / (upperLimit - lowerLimit)) * (upper - lower);
     }
     

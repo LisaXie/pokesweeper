@@ -64,17 +64,20 @@ class Minesweeper {
         }
         
         var cell = this.getCellAt(row, col);
-        cell.flag = !cell.flag;
-        
-        if (cell.flag) {
-            this.field.flagCount++;
-        } else {
-            this.field.flagCount--;
+        if (!cell.open) {
+            cell.flag = !cell.flag;
+
+            if (cell.flag) {
+                this.field.flagCount++;
+            } else {
+                this.field.flagCount--;
+            }
+
+            this.observers.forEach(observer => {
+                observer.onCellChanged(cell);
+            });
         }
         
-        this.observers.forEach(observer => {
-            observer.onCellChanged(cell);
-        });
     }
     
     /**
@@ -139,7 +142,7 @@ class Minesweeper {
 
     protected recursivelyOpenCell(cell: Cell): void {
         cell.open = true;
-        
+
         this.observers.forEach((observer) => {
             observer.onCellChanged(cell);
         })
