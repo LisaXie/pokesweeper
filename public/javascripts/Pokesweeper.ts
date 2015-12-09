@@ -31,6 +31,7 @@ class Pokesweeper implements MSObserver {
         this.ms = new ImageMinesweeper(cells, PokeUtil.getBombRatio());
         this.ms.addObserver(this);
         this.bindResetButton();
+        this.bindPokedexButton();
         this.updateScores();
         this.updateBombCount(this.ms.getRemainingBombCount());
         this.timer = new Timer($(this.timeCounterDomId));
@@ -228,5 +229,11 @@ class Pokesweeper implements MSObserver {
         
         domCell.css('background-color', '#' + cell.color);
         return domCell;
+    }
+
+    private bindPokedexButton(): void {
+        $('#pokedexContainer').click(() => {
+            window.location.replace('pokedex');
+        });
     }
 }

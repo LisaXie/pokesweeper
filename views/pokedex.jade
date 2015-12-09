@@ -1,0 +1,25 @@
+extends layout
+
+block head
+  script(src='javascripts/jquery.mobile.custom.min.js')
+  script(src='javascripts/PokeUtil.js')
+  script(src='javascripts/Pokesweeper.js')
+  script(src='javascripts/names.js')
+  script(src='javascripts/pokedex.js')
+
+
+block content
+ h1#pageTitle
+   a(name='Pokesweeper' href='/') Pokesweeper
+
+ #pokedexGrid
+
+ #footer
+  p The difficulty increases with the Pokémon's position in the regional Pokédex.
+  p
+    | View on 
+    a(href='https://github.com/takumif/pokesweeper' name='GitHub' target='blank') GitHub
+    | . Created by 
+    a(href='http://www.takumifujimoto.com' name='Takumi Fujimoto' target='blank') Takumi Fujimoto
+    | .
+
