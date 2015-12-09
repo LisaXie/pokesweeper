@@ -24,7 +24,7 @@ function initDropdown(): void {
 }
 
 function selectPokemon(): void {
-    var dropdown = $('#dropdown')[0];
+    var dropdown = <HTMLSelectElement>$('#dropdown')[0];
     var pokemonId = dropdown.options[dropdown.selectedIndex].value;
     window.location.replace(pokemonId);
 }
