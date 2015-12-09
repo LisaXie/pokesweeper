@@ -35,7 +35,7 @@ function chooseRandom(): void {
 
 function chooseRandomUnsolved(): void {
     if (localStorage.getItem('pokedex') === PokeUtil.getPokemonTotalCount().toString()) {
-        console.log('Congrats, you have no unsolved Pokémon left!');
+        alert('Congrats, you have no unsolved Pokémon left!');
     } else {
         do {
             var pokemonId = PokeUtil.getRandomPokemonId();
