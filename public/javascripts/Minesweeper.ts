@@ -18,6 +18,9 @@ class Minesweeper {
         this.init();
     }
 
+    /**
+     * Create the minefield anew, and notify obesrvers
+     */
     init(): void {
         this.field = this.getField();
         this.moveMade = false;
@@ -44,6 +47,9 @@ class Minesweeper {
         return this.field.isValidCell(row, col);
     }
 
+    /**
+     * Make a move and notify observers
+     */
     makeMove(row: number, col: number): void {
         if (!this.moveMade) {
             // first move, so place bombs
@@ -58,6 +64,9 @@ class Minesweeper {
         this.notifyObservers();
     }
     
+    /**
+     * Toggle flag if the cell is not open
+     */
     toggleFlag(row: number, col: number): void {
         if (!this.isValidCell(row, col)) {
             throw 'Tried to toggle flag on an invalid cell';
