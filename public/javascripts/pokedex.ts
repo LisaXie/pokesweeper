@@ -2,21 +2,14 @@
 /// <reference path="../../typings/jquery/jquery.d.ts" />
 
 $(() => {
-    var solved: string[] = getSolved();
+    updateCounter();
     populatePokedex();
 });
 
-function getSolved(): string[] {
-    var solvedPokemonId: string[] = [];
-    var counter = 1;
-    while (counter <= PokeUtil.getPokemonTotalCount()) {
-        var id = ('00' + counter.toString()).substr(-3);
-        if (localStorage.getItem(id) !== null) {
-            solvedPokemonId[solvedPokemonId.length] = id;
-        }
-        counter++;
-    }
-    return solvedPokemonId;
+function updateCounter(): void {
+    var solved = PokeUtil.getSolvedIndices().length.toString();
+    var total = PokeUtil.getPokemonTotalCount().toString();
+    $('#pokedexCounter').text(solved + ' / ' + total);
 }
 
 function populatePokedex(): void {

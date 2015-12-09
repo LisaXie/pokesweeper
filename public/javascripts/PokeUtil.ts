@@ -45,4 +45,17 @@ class PokeUtil {
     static isSolved(index: string): boolean {
         return localStorage.getItem(index) !== null;
     }
+    
+    static getSolvedIndices(): string[] {
+        var indices: string[] = [];
+        
+        for (var i = 1; i <= PokeUtil.getPokemonTotalCount(); i++) {
+            var index = PokeUtil.getIndexStr(i);
+            
+            if (localStorage.getItem(index) !== null) {
+                indices.push(index);
+            }
+        }
+        return indices;
+    }
 }

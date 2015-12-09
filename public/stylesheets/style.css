@@ -130,6 +130,10 @@ h1#pageTitle {
 
 /****************** POKEDEX ******************/
 
+#pokedexCounter {
+  text-align: center;
+}
+
 #pokedexGrid {
   width: 600px;
   margin: auto;
