@@ -1,8 +1,9 @@
 /// <reference path="PokeUtil.ts" />
+/// <reference path="../../typings/jquery/jquery.d.ts" />
 
 $(() => {
     var solved: string[] = getSolved();
-    populatePokedex(solved);
+    populatePokedex();
 });
 
 function getSolved(): string[] {
@@ -18,24 +19,23 @@ function getSolved(): string[] {
     return solvedPokemonId;
 }
 
-function populatePokedex(solved): void {
-    var indexes = PokeUtil.getPokemonTotalCount();
-    for (var row = 0; row <= (indexes / 10); row ++) {
+function populatePokedex(): void {
+    var cols = 10;
+    
+    for (var row = 0; row < PokeUtil.getPokemonTotalCount()/cols; row++) {
         $('#pokedexGrid').append('<div class="row" id="row' + row.toString() + '"></div>');
-        for (var col = 0; col < 10; col ++) {
-            var sprite = $('<div/>', {
-                class: 'pokedexCell',
-                row: row,
-                col: col,
-            });
-            var numIndex = row * 10 + col + 1;
-            var index = ("00" + (numIndex).toString()).substr(-3);
-            if (solved.indexOf(index) !== -1){
-                sprite.html('<img class=pokedexSprite src=/images/sprites/' + index + '.png>');
-            } else if (numIndex <= PokeUtil.getPokemonTotalCount()) {
-                sprite.html('<img class="pokedexSprite pokedexNonSolved" src=/images/sprites/' + index + '.png>');
-            }
-            $('#row' + row.toString()).append(sprite);
+    }
+    
+    for (var i = 1; i <= PokeUtil.getPokemonTotalCount(); i++) {
+        var index = PokeUtil.getIndexStr(i);
+        var sprite = $('<div class="pokedexCell"><a href="/' + index + '" /></div>');
+        var spriteImage = $('<img class="pokedexSprite" src="/images/sprites/' + index + '.png" />');
+        
+        sprite.children().append(spriteImage);
+        
+        if (!PokeUtil.isSolved(index)) {
+            sprite.addClass('pokedexNonSolved');
         }
+        $('#row' + Math.floor((i - 1) / cols).toString()).append(sprite);
     }
 }

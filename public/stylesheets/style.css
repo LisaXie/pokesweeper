@@ -30,7 +30,7 @@ h1#pageTitle {
 }
 
 #selectionContainer {
-  width: intrinsic;
+  width: max-content;
   margin: auto;
 }
 
@@ -40,7 +40,7 @@ h1#pageTitle {
 }
 
 #counters {
-  width: intrinsic;
+  width: max-content;
   margin: 10px auto;
   overflow: auto;
 }
@@ -69,18 +69,18 @@ h1#pageTitle {
 }
 
 #field {
-  width: intrinsic;
+  width: max-content;
   margin: 20px auto 70px auto;
   overflow: auto;
 }
 
 #footer {
-  width: intrinsic;
+  width: max-content;
   margin: 20px auto;
 }
 
 #share {
-  width: intrinsic;
+  width: max-content;
   margin: 20px auto;
 }
 
@@ -92,7 +92,6 @@ h1#pageTitle {
 
 .row {
   clear: both;
-  overflow: auto;
 }
 
 .cell {
@@ -118,15 +117,32 @@ h1#pageTitle {
   background-color: #C0C0C0;
 }
 
+.flaggedCell {
+  cursor: pointer;
+  background-image: url('/images/pattern_flagged.png');
+}
+
+.bombCell {
+  cursor: pointer;
+  background-image: url('/images/bomb_cell.png');
+}
+
+/****************** POKEDEX ******************/
+
 #pokedexGrid {
-  width: 550px;
+  width: 600px;
   margin: auto;
 }
 
 .pokedexCell{
-  display: inline;
-  width:55px;
-  height: 55px;
+  float: left;
+  width: 60px;
+  height: 60px;
+}
+
+.pokedexCell a {
+  width: inherit;
+  height: inherit;
 }
 
 .pokedexSprite {
@@ -137,13 +153,4 @@ h1#pageTitle {
 .pokedexNonSolved {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
-}
-.flaggedCell {
-  cursor: pointer;
-  background-image: url('/images/pattern_flagged.png');
-}
-
-.bombCell {
-  cursor: pointer;
-  background-image: url('/images/bomb_cell.png');
 }
