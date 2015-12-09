@@ -40,7 +40,6 @@ class ImageMinesweeper extends Minesweeper {
             }
         }
         this.bombCount = Math.floor(cellCount * this.bombRatio);
-
         return new Minefield(cells);
     }
 }

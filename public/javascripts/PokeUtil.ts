@@ -19,7 +19,9 @@ class PokeUtil {
             }
         }
         
-        return 0.1 + ((id - lowerLimit) / (upperLimit - lowerLimit)) * (upper - lower);
+        var a = 0.1 + ((id - lowerLimit) / (upperLimit - lowerLimit)) * (upper - lower);
+        console.log("BombRation = ", a);
+        return a;
     }
     
     /**
