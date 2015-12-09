@@ -2,7 +2,7 @@
 
 $(() => {
     var solved: string[] = getSolved();
-    populatePokeDex(solved);
+    populatePokedex(solved);
 });
 
 function getSolved(): string[] {
@@ -19,8 +19,7 @@ function getSolved(): string[] {
 	return solvedPokemonId;
 }
 
-function populatePokeDex(indexes): void {
-
+function populatePokedex(indexes): void {
 	for (var row = 0; row < (indexes.length / 10); row ++) {
 		$('#pokedexGrid').append('<div class="row" id="row' + row.toString() + '"></div>');
 		for (var col = 0; col < 10; col ++) {
