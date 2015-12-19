@@ -10,7 +10,9 @@ block content
   h1#pageTitle
     a(name='Pokesweeper' href='/') Pokésweeper
 
-  h2#pokedexCounter
+  #pokedexHeader
+    h2#pokedexCounter
+    select#pokedexSelector.selectionClickable(onchange='selectPokedex()')
 
   #pokedexGrid
 

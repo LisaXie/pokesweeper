@@ -131,8 +131,24 @@ h1#pageTitle {
 
 /****************** POKEDEX ******************/
 
+#pokedexHeader {
+  width: max-content;
+  height: max-content;
+  margin: auto;
+  display: block;
+}
+
 #pokedexCounter {
   text-align: center;
+  float: left;
+  width: 200px;
+}
+
+#pokedexSelector {
+  width: 120px;
+  float: right;
+  height: 24px;
+  margin: 17.4px;
 }
 
 #pokedexGrid {

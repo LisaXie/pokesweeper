@@ -45,7 +45,7 @@ class PokeUtil {
     static isSolved(index: string): boolean {
         return localStorage.getItem(index) !== null;
     }
-    
+
     static getSolvedIndices(): string[] {
         var indices: string[] = [];
         
@@ -58,4 +58,18 @@ class PokeUtil {
         }
         return indices;
     }
+
+    /**
+    * Returns the Pokedex limits for each regional Pokedex
+    */
+    static getLimits(): int[] {
+        return [0, 151, 251, 386, 494, 649, 721];
+    }
+
+    static getPokedex(): string[] {
+        return ['Kanto','Johto','Hoenn','Sinnoh','Unova','Kalos', 'Entire'];
+    }
+
+   
+    
 }
